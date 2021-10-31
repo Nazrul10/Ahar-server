@@ -65,6 +65,15 @@ async function run() {
         res.send(result);
       });
   });
+    //update status Manage All order from the database
+  app.put("/status/:id", async (req, res) => {
+    const id = req.params.id;
+    const Displaystatus = req.body;
+    const filter = { _id: ObjectId(id) };
+    const result = await orderCollaction.updateOne(filter, {$set: {status: "Approved",},})
+    res.send(result);
+    console.log(result);
+  });
     //POST Orders
     app.post('/myorders', async (req, res)=>{
         const order = req.body
